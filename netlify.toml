@@ -1,2 +1,4 @@
 [build.environment]
   NODE_VERSION = "18"
+[build]
+  command = "rm -rf node_modules package-lock.json && npm install && npm run build"
