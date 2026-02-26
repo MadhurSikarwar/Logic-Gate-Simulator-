@@ -1,0 +1,749 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Theme Variables ─────────────────────────────────────────── */
+:root {
+  --bg-app: #070b0f;
+  --bg-surface: #0c1118;
+  --bg-surface-2: #111827;
+  --bg-surface-3: #1a2235;
+  --bg-hover: #1e2d44;
+  --border: #1e2d44;
+  --border-hi: #2d4060;
+  --text-1: #e2e8f5;
+  --text-2: #7f8ea3;
+  --text-3: #4a5568;
+  --accent: #00d4ff;
+  --accent-hover: #00b8e0;
+  --accent-dim: rgba(0, 212, 255, 0.10);
+  --accent-glow: 0 0 20px rgba(0, 212, 255, 0.35);
+  --sig-high: #00ff9d;
+  --sig-low: #374151;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --toolbar-h: 52px;
+  --statusbar-h: 28px;
+  --panel-left-w: 260px;
+  --panel-right-w: 280px;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --trans: 0.15s ease;
+}
+
+.light {
+  --bg-app: #eef2f8;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f8fafc;
+  --bg-surface-3: #f1f5f9;
+  --bg-hover: #e8f0fe;
+  --border: #e2e8f0;
+  --border-hi: #cbd5e1;
+  --text-1: #1a202c;
+  --text-2: #4a5568;
+  --text-3: #94a3b8;
+  --accent: #0891b2;
+  --accent-hover: #0e7490;
+  --accent-dim: rgba(8, 145, 178, 0.08);
+  --accent-glow: 0 0 20px rgba(8, 145, 178, 0.25);
+  --sig-high: #059669;
+  --sig-low: #94a3b8;
+}
+
+/* ─── Cyberpunk Theme ──────────────────────────────────────────── */
+.cyberpunk {
+  --bg-app: #06000e;
+  --bg-surface: #0e0018;
+  --bg-surface-2: #160022;
+  --bg-surface-3: #200033;
+  --bg-hover: #2a0040;
+  --border: #2a0040;
+  --border-hi: #440066;
+  --text-1: #f0d8ff;
+  --text-2: #b06de0;
+  --text-3: #6b3588;
+  --accent: #ff00ff;
+  --accent-hover: #d400d4;
+  --accent-dim: rgba(255, 0, 255, 0.08);
+  --accent-glow: 0 0 20px rgba(255, 0, 255, 0.4);
+  --sig-high: #facc15;
+  --sig-low: #2a0040;
+  --success: #facc15;
+  --warning: #ff6b00;
+  --danger: #ff0055;
+}
+
+/* ─── Blueprint Theme ──────────────────────────────────────────── */
+.blueprint {
+  --bg-app: #002060;
+  --bg-surface: #002878;
+  --bg-surface-2: #00318e;
+  --bg-surface-3: #003ba4;
+  --bg-hover: #0046ba;
+  --border: #1254c7;
+  --border-hi: #2e6de0;
+  --text-1: #e8f4ff;
+  --text-2: #a8c8f0;
+  --text-3: #6090c8;
+  --accent: #c8dfff;
+  --accent-hover: #e0efff;
+  --accent-dim: rgba(200, 223, 255, 0.10);
+  --accent-glow: 0 0 16px rgba(200, 223, 255, 0.3);
+  --sig-high: #7ef5ff;
+  --sig-low: #1254c7;
+  --success: #7ef5ff;
+  --warning: #ffd966;
+  --danger: #ff6666;
+}
+
+/* ─── Classic PCB Theme ────────────────────────────────────────── */
+.pcb {
+  --bg-app: #071a0e;
+  --bg-surface: #0a2210;
+  --bg-surface-2: #0d2e15;
+  --bg-surface-3: #10381a;
+  --bg-hover: #144520;
+  --border: #1a4a28;
+  --border-hi: #246438;
+  --text-1: #c8f0d2;
+  --text-2: #7ab88a;
+  --text-3: #3f6848;
+  --accent: #3dc45c;
+  --accent-hover: #4ade70;
+  --accent-dim: rgba(61, 196, 92, 0.10);
+  --accent-glow: 0 0 18px rgba(61, 196, 92, 0.35);
+  --sig-high: #3dc45c;
+  --sig-low: #1a4a28;
+  --success: #3dc45c;
+  --warning: #b87333;
+  --danger: #cc3333;
+}
+
+/* ─── Reset ────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg-app);
+  color: var(--text-1);
+  transition: background var(--trans), color var(--trans);
+}
+
+/* ─── Scrollbars ────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-hi);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+
+/* ─── ReactFlow Overrides ───────────────────────────────────────── */
+.react-flow {
+  background: var(--bg-app) !important;
+}
+
+.react-flow__background {
+  background: var(--bg-app) !important;
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+.react-flow__minimap {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+.react-flow__controls {
+  background: var(--bg-surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+  padding: 3px !important;
+  gap: 2px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.react-flow__controls-button {
+  background: transparent !important;
+  border: none !important;
+  border-radius: var(--radius) !important;
+  color: var(--text-2) !important;
+  fill: var(--text-2) !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all var(--trans) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--accent-dim) !important;
+  color: var(--accent) !important;
+  fill: var(--accent) !important;
+}
+
+.react-flow__selection {
+  background: var(--accent-dim) !important;
+  border: 1.5px solid var(--accent) !important;
+}
+
+.react-flow__edge-path {
+  stroke: var(--border-hi) !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--accent) !important;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  height: 32px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  transition: all var(--trans);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-icon {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.btn-sm {
+  height: 26px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-2);
+}
+
+.btn-ghost:hover {
+  background: var(--bg-surface-3);
+  color: var(--text-1);
+}
+
+.btn-ghost:active {
+  background: var(--bg-hover);
+}
+
+.btn-ghost.is-active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #000;
+  font-weight: 600;
+  border-color: var(--accent);
+}
+
+.btn-accent:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--accent-glow);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-1);
+  border-color: var(--border-hi);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* ─── Dividers ──────────────────────────────────────────────────── */
+.sep {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* ─── Input ─────────────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  background: var(--bg-surface-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-1);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--trans);
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+/* ─── Panel Headers ─────────────────────────────────────────────── */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  flex-shrink: 0;
+}
+
+.panel-section {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-section:last-child {
+  border-bottom: none;
+}
+
+/* ─── Category / Component Items ────────────────────────────────── */
+.comp-category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color var(--trans);
+}
+
+.comp-category:hover {
+  color: var(--text-1);
+}
+
+.comp-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px 8px 20px;
+  cursor: pointer;
+  color: var(--text-2);
+  font-size: 13px;
+  border-radius: var(--radius);
+  transition: all var(--trans);
+}
+
+.comp-item:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+
+.comp-item:active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ─── Status Bar ────────────────────────────────────────────────── */
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 12px;
+  height: 100%;
+  border-left: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-3);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.status-item:first-child {
+  border-left: none;
+}
+
+/* ─── Keyboard Shortcut ─────────────────────────────────────────── */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 5px;
+  height: 18px;
+  min-width: 18px;
+  background: var(--bg-surface-3);
+  border: 1px solid var(--border-hi);
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-2);
+}
+
+/* ─── Chip / Badge ───────────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 7px;
+  height: 18px;
+  border-radius: 9px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.chip-accent {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.chip-success {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* ─── Signal Indicator ───────────────────────────────────────────── */
+.signal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sig-high);
+  box-shadow: 0 0 6px var(--sig-high);
+  flex-shrink: 0;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────── */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(-12px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-right {
+  from {
+    transform: translateX(12px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 18px rgba(0, 212, 255, 0.7);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.anim-fade {
+  animation: fade-in 0.2s ease;
+}
+
+.anim-left {
+  animation: slide-left 0.2s ease;
+}
+
+.anim-right {
+  animation: slide-right 0.2s ease;
+}
+
+.anim-up {
+  animation: slide-up 0.2s ease;
+}
+
+/* ─── Tooltip ────────────────────────────────────────────────────── */
+.tooltip-box {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  padding: 5px 10px;
+  background: var(--bg-surface-3);
+  color: var(--text-1);
+  font-size: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-hi);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  animation: fade-in 0.12s ease;
+}
+
+.tooltip-shortcut {
+  margin-left: 6px;
+  opacity: 0.65;
+}
+
+/* ─── Canvas Empty Hint ──────────────────────────────────────────── */
+.canvas-hint {
+  pointer-events: none;
+  padding: 8px 16px;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-hi);
+  border-radius: var(--radius-lg);
+  color: var(--text-3);
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Scrollable panels ──────────────────────────────────────────── */
+.panel-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
+
+/* ─── Logo glow ──────────────────────────────────────────────────── */
+.logo-glow {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+}
+
+.light .logo-glow {
+  text-shadow: 0 0 16px rgba(8, 145, 178, 0.4);
+}
+
+/* ─ Wire / Signal Edge Animations ──────────────────────────── */
+@keyframes wire-flow {
+  from {
+    stroke-dashoffset: 24;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes wire-pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes hazard-flash {
+
+  0%,
+  100% {
+    stroke: #f59e0b;
+  }
+
+  50% {
+    stroke: #ef4444;
+  }
+}
+
+@keyframes node-trigger {
+  0% {
+    box-shadow: 0 0 0px rgba(0, 255, 157, 0);
+  }
+
+  40% {
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.8);
+  }
+
+  100% {
+    box-shadow: 0 0 0px rgba(0, 255, 157, 0);
+  }
+}
+
+/* Delay mode overlay badge */
+.delay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  height: 24px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--warning);
+  letter-spacing: 0.05em;
+  animation: wire-pulse 1.5s ease-in-out infinite;
+}
+
+/* Circuit stats panel */
+.stats-panel {
+  position: absolute;
+  bottom: calc(var(--statusbar-h) + 12px);
+  right: 12px;
+  width: 240px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hi);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  animation: slide-up 0.18s ease;
+  overflow: hidden;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.stats-row:last-child {
+  border-bottom: none;
+}
+
+.stats-label {
+  color: var(--text-2);
+}
+
+.stats-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--text-1);
+  font-size: 11px;
+}
+
+.stats-value.accent {
+  color: var(--accent);
+}
+
+.stats-value.high {
+  color: var(--sig-high);
+}
+
+/* Propagation delay slider */
+.delay-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-hi);
+  outline: none;
+  cursor: pointer;
+}
+
+.delay-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--accent);
+}
